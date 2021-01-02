@@ -22,11 +22,10 @@ from telegram.utils.helpers import escape_markdown
 
 PM_START_TEXT = """
 
-Hi {}, my name is {}! 
-I am an Anime themed group management bot.
-You can find my list of available commands with /help.
-
-i'm a group manager bot. Maintained by @GarimaQueen
+_Hey_{}, _my name is_ {}! 
+*I am a powerful Group management bot*!
+_You can find my list of available commands with_ /help.
+*You can fell free and add your group's*
 
 """
 
@@ -52,8 +51,7 @@ And the following:
 SAITAMA_IMG = "https://images.alphacoders.com/679/679719.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
-You can donate to the original writer of the Base code, Paul
-There are two ways of supporting him; [PayPal](paypal.me/PaulSonOfLars)."""
+But now this is not possible!."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -156,10 +154,10 @@ def start(update: Update, context: CallbackContext):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup([
-                  [InlineKeyboardButton(text="👸 Add Jassica to your group", url="t.me/{}?startgroup=true".format(context.bot.username))],
-                  [InlineKeyboardButton(text="Source Code", url="https://github.com/QueenArzoo/ElisaRobot"), InlineKeyboardButton(text="❓ Help", callback_data="help_back")]]))
+                  [InlineKeyboardButton(text="🎗️Add to your group🎗️", url="t.me/{}?startgroup=true".format(context.bot.username))],
+                  [InlineKeyboardButton(text="🎎Support🎎", url="https://t.me/fun_heat"), InlineKeyboardButton(text="💠Help💠", callback_data="help_back")]]))
     else:
-        update.effective_message.reply_text("Yo, whadup?")
+        update.effective_message.reply_text("Hoya, what? Why you itching me🧐")
 
 
 # for test purposes
@@ -210,7 +208,7 @@ def help_button(update: Update, context: CallbackContext):
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
-                        text="Back", callback_data="help_back")
+                        text="🍂Back🍂", callback_data="help_back")
                 ]]))
 
         elif prev_match:
@@ -262,7 +260,7 @@ def get_help(update: Update, context: CallbackContext):
             "Contact me in PM to get the list of possible commands.",
             reply_markup=InlineKeyboardMarkup([[
                 InlineKeyboardButton(
-                    text="Help",
+                    text="🎸Help🎸",
                     url="t.me/{}?start=help".format(context.bot.username))
             ]]))
         return
@@ -274,7 +272,7 @@ def get_help(update: Update, context: CallbackContext):
         send_help(
             chat.id, text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Back",
+                [[InlineKeyboardButton(text="🍂Back🍂",
                                        callback_data="help_back")]]))
 
     else:
@@ -337,7 +335,7 @@ def settings_button(update: Update, context: CallbackContext):
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
-                        text="Back",
+                        text="🍂Back🍂",
                         callback_data="stngs_back({})".format(chat_id))
                 ]]))
 
@@ -397,7 +395,7 @@ def get_settings(update: Update, context: CallbackContext):
     # ONLY send settings in PM
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = "Click here to get this chat's settings, as well as yours."
+            text = "Click here to get this chat's settings, as well as yours🤗."
             msg.reply_text(
                 text,
                 reply_markup=InlineKeyboardMarkup([[
@@ -407,7 +405,7 @@ def get_settings(update: Update, context: CallbackContext):
                             context.bot.username, chat.id))
                 ]]))
         else:
-            text = "Click here to check your settings."
+            text = "Click here to check your settings💁."
 
     else:
         send_settings(chat.id, user.id, True)
@@ -460,7 +458,7 @@ def migrate_chats(update: Update, context: CallbackContext):
     for mod in MIGRATEABLE:
         mod.__migrate__(old_chat, new_chat)
 
-    LOGGER.info("Successfully migrated!")
+    LOGGER.info("Successfully migrated😒!")
     raise DispatcherHandlerStop
 
 
